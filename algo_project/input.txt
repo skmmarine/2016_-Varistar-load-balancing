@@ -1,0 +1,6 @@
+beverages [
+{beverageld : "espresso" , count : 3}
+{beverageld : "icetea" , count : 3}
+{beverageld : "lemonade" , count : 3}
+{beverageld : "cafelatte" , count : 7}
+]
