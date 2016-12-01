@@ -14,8 +14,8 @@
 #include <string>
 #include "windows.h" //시간을 지연시키기 위한 헤더
 
-#define ALBA_NUM 20
-#define SKILL_ALBA 17
+#define ALBA_NUM 10
+#define SKILL_ALBA 5
 using namespace std;
 class alba
 {

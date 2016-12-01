@@ -4,6 +4,7 @@
 void changeAlbaState(string SmallGroup,alba* emp[],int index)
 {
 	int time=0;
+	emp[index]->incmakeTime(time);
 	if(SmallGroup == "\"espresso\"")
 		time = emp[index]->getespressoT();
 	else if(SmallGroup == "\"cafemoca\"")
@@ -16,8 +17,11 @@ void changeAlbaState(string SmallGroup,alba* emp[],int index)
 		time = emp[index]->getcafelatteT();
 	else if(SmallGroup == "\"lemonade\"")
 		time = emp[index]->getlemonadeT();
-	emp[index]->incmakeTime(time);
-	emp[index]->setmakeName(SmallGroup);
+	if(time != 0)
+	{
+		emp[index]->incmakeTime(time);
+		emp[index]->setmakeName(SmallGroup);
+	}
 }
 void printallstate(string enterID,alba* emp[])
 {
@@ -71,6 +75,8 @@ void orderProcess(string enterID,alba* emp[], int MenuCount, string SmallGroup, 
 		{
 			emp[index]->setState();                //바리스타 일하는 상태로 변경
 			changeAlbaState(SmallGroup,emp,index); //바리스타 객체에 음료이름 전달
+			if(emp[index]->getmakeTime() ==0)
+				emp[index]->setState();
 			emp[index]->incIndex();                //다음 바리스타를 가리킴
 			emp[index]->setIndex();				   //index가 바리스타를 초과했을때 초기화
 			MenuCount--;
@@ -240,29 +246,29 @@ string checkMaster(string enterID)
 }
 void inputMenual(string enterID,alba* emp[])
 {
-   while(true)
-   {
-      int dataType = 0;
-      system("cls");
-      cout<<"adminID  "<<enterID<<endl<<endl;
-      cout << "(1) Data load from txt file   (2) Data load from MySQL  (3) Exit"  << endl<< "choose : ";
-      cin >> dataType;
-      switch(dataType)
-      {      
-      case 1: //text file input
-         whenText(enterID,emp);
-         break;
-      case 2:
-         whenMySQL(enterID,emp);
-         break;
-      case 3:
-         system("cls");
-         return;
-      default:
-         cout << "Wrong Command" << endl;
-      }
-      Sleep(1500);
-   }
+	while(true)
+	{
+		int dataType = 0;
+		system("cls");
+		cout<<"adminID  "<<enterID<<endl<<endl;
+		cout << "(1) Data load from txt file   (2) Data load from MySQL  (3) Exit"  << endl<< "choose : ";
+		cin >> dataType;
+		switch(dataType)
+		{      
+		case 1: //text file input
+			whenText(enterID,emp);
+			break;
+		case 2:
+			whenMySQL(enterID,emp);
+			break;
+		case 3:
+			system("cls");
+			return;
+		default:
+			cout << "Wrong Command" << endl;
+		}
+		Sleep(1500);
+	}
 }
 int main()
 {
